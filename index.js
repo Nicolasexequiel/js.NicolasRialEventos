@@ -120,7 +120,7 @@ while ( ropa != "0"){
 
 
     }
-    ropa = parseInt(prompt("ingrese el numero de la prenda que desea \n 1- remera \n 2-remera manga larga \n 3- musculosa \n 4- buzo \n 5-short \n 6- jean \n 7- joggin \n presione 0 para finalizar "));
+    ropa = parseInt(prompt("ingrese el numero de la prenda que desea:  \n 1- remera \n 2-remera manga larga \n 3- musculosa \n 4- buzo \n 5-short \n 6- jean \n 7- joggin \n presione 0 para finalizar "));
     
    
 
