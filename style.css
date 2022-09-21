@@ -1,0 +1,19 @@
+.logo{
+    width: 200px;
+    margin: 0px 156px 0px -387px;
+}
+.titulo{
+    text-align: center;
+}
+.cards{
+    display: flex;
+    justify-content: space-around;
+}
+img{
+    width: 100px;
+    max-width: 300px;
+}
+.nav{
+    display: flex;
+    justify-content: center;
+}

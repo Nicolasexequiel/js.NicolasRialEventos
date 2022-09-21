@@ -17,8 +17,6 @@ function datos (evento){
 
  mensaje = "hola " + nombre + " usted tiene "+ años + " años "+ mensajeEdad;
  bienvenida.textContent= mensaje;
-
-
 }
 
 let miForm =document.querySelector("#formulario");
