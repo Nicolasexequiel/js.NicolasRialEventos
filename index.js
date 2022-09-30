@@ -29,6 +29,9 @@ const contenedorCarritoCompras = document.querySelector("#items")
 
 const contenedorFooterCarrito = document.querySelector("#footer");
 
+
+
+
 /**
  * Ejecución de funciones
  */
@@ -42,9 +45,9 @@ dibujarCatalogoProductos();
  * Definiciones de funciones
  */
 
- function cargarProductos() {
+function cargarProductos() {
 
-    
+
     productos.push(new Producto(1, 'Arroz de coliflor con pollo', 1000, './imagenes/comida2.png'));
     productos.push(new Producto(2, 'Fideos de zucchini con salsa bolognesa', 1000, './imagenes/comida3.png'));
     productos.push(new Producto(3, 'Carne al horno con puré de coliflor', 1000, './imagenes/comidas5.png'));
@@ -65,14 +68,14 @@ function dibujarCarrito() {
 
     elementosCarrito.forEach(
         (elemento) => {
-            let renglonesCarrito= document.createElement("tr");
-            
+            let renglonesCarrito = document.createElement("tr");
+
             renglonesCarrito.innerHTML = `  
                 <td>${elemento.producto.id}</td>
                 <td>${elemento.producto.nombre}</td>
                 <td><input id="cantidad-producto-${elemento.producto.id}" type="number" value="${elemento.cantidad}" min="1" max="1000" step="1" style="width: 50px;"/></td>
                 <td>$ ${elemento.producto.precio}</td>
-                <td>$ ${estandarDolaresAmericanos.format(elemento.producto.precio*elemento.cantidad)}</td>
+                <td>$ ${estandarDolaresAmericanos.format(elemento.producto.precio * elemento.cantidad)}</td>
                 <td><button id="eliminar-producto-${elemento.producto.id}" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button></td>
                 
             `;
@@ -94,9 +97,17 @@ function dibujarCarrito() {
             botonEliminarProducto.addEventListener('click', () => {
                 //alert("Hicimos click" + elementosCarrito.indexOf(elemento));
 
-                let indiceEliminar =  elementosCarrito.indexOf(elemento);
-                elementosCarrito.splice(indiceEliminar,1);
-                
+                let indiceEliminar = elementosCarrito.indexOf(elemento);
+                elementosCarrito.splice(indiceEliminar, 1);
+                // agregando libreria 
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'comida eliminada',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+
                 dibujarCarrito();
             });
 
@@ -106,11 +117,11 @@ function dibujarCarrito() {
 
     const valorInicial = 0;
     const totalCompora = elementosCarrito.reduce(
-        (previousValue, currentValue) => previousValue + currentValue.producto.precio*currentValue.cantidad,
+        (previousValue, currentValue) => previousValue + currentValue.producto.precio * currentValue.cantidad,
         valorInicial
     );
 
-    if(elementosCarrito.length == 0) {
+    if (elementosCarrito.length == 0) {
         contenedorFooterCarrito.innerHTML = `<th scope="row" colspan="6">Carrito vacío - comience a comprar!</th>`;
     } else {
         contenedorFooterCarrito.innerHTML = `<th scope="row" colspan="6">Total de la compra: ${totalCompora}</th>`;
@@ -136,7 +147,7 @@ function crearCard(producto) {
     cuerpoCarta.className = "card-body";
     cuerpoCarta.innerHTML = `
         <h5>${producto.nombre}</h5>
-        <p>$ ${producto.precio} USD</p>
+        <p>$ ${producto.precio} ARS</p>
     `;
     cuerpoCarta.append(botonAgregar);
 
@@ -162,11 +173,11 @@ function crearCard(producto) {
     botonAgregar.onclick = () => {
         //alert("Hiciste click en el botón del producto:" + producto.id);
 
-        let elementoExistente = 
+        let elementoExistente =
             elementosCarrito.find((elem) => elem.producto.id == producto.id);
-        
-        if(elementoExistente) {
-            elementoExistente.cantidad+=1;
+
+        if (elementoExistente) {
+            elementoExistente.cantidad += 1;
         } else {
             let elementoCarrito = new ElementoCarrito(producto, 1);
             elementosCarrito.push(elementoCarrito);
@@ -174,33 +185,37 @@ function crearCard(producto) {
 
         dibujarCarrito();
 
-            swal({
-                title: '¡Producto agregado!',
-                text: `${producto.nombre} agregado al carrito`,
-                icon: 'success',
-                buttons: {
-                    cerrar: {
-                        text: "cerrar",
-                        value: false
-                    },
-                    carrito: {
-                        text: "ir a carrito",
-                        value: true
-                    }
+        swal({
+            title: '¡Producto agregado!',
+            text: `${producto.nombre} agregado al carrito`,
+            icon: 'success',
+            buttons: {
+                cerrar: {
+                    text: "cerrar",
+                    value: false
+                },
+                carrito: {
+                    text: "ir a carrito",
+                    value: true
                 }
-            }).then((decision) => {
-                if(decision) {
-                    const myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {keyboard: true});
-                    const modalToggle = document.getElementById('toggleMyModal'); 
-                    myModal.show(modalToggle);
-                } else {
-                    swal("No quieres ir al carrito");
+            }
+        }).then((decision) => {
+            if (decision) {
+                const myModal = new bootstrap.Modal(document.getElementById('exampleModal'), { keyboard: true });
+                const modalToggle = document.getElementById('toggleMyModal');
+                myModal.show(modalToggle);
+            } else {
+
+                Swal.fire({
+                    icon: 'error',
+                    text: 'no quieres ir al carrito',
+              });
             }
         });
 
 
     }
-   
+
 
     return carta;
 
@@ -217,4 +232,17 @@ function dibujarCatalogoProductos() {
     );
 
 }
+
+//añadir fecha y hora 
+const hoy = new Date
+
+let boton = document.getElementById("fecha");
+boton.innerHTML = hoy ;
+
+
+
+
+
+
+
 
