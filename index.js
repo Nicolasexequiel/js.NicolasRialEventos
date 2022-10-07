@@ -209,7 +209,7 @@ function crearCard(producto) {
                 Swal.fire({
                     icon: 'error',
                     text: 'no quieres ir al carrito',
-              });
+                });
             }
         });
 
@@ -237,12 +237,46 @@ function dibujarCatalogoProductos() {
 const hoy = new Date
 
 let boton = document.getElementById("fecha");
-boton.innerHTML = hoy ;
+boton.innerHTML = hoy;
 
 
+//agregando fetch
 
+//   const items2 = document.getElementById("items2");
 
+//     fetch("./data.json")
+//         .then(response => response.json())
+//         .then(data => {
+//             data.forEach(producto => {
+//                 const li = document.createElement("li");
+//                 li.innerHTML = `
+//         <h2>iD: ${producto.id}</h2>
+//         <p>nombre: ${producto.nombre}</p>
+//         <b>$ ${producto.precio}</b>
+//         `;
 
+//                 items2.append(li);
+//             });
+//         });
+const agregarComidas = async () => {
+    const items2 = document.getElementById("items2");
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+        const data = await response.json();
 
+        data.forEach(publicacion => {
+            const li = document.createElement("li");
+            li.innerHTML = ` 
+            <h2>iD: ${publicacion.id}</h2>
+            <p>User: ${publicacion.userId}</p>
+            <p>nombre: ${publicacion.title}</p>
+            <b> publicacion ${publicacion.body}</b>
+           `;
+            items2.append(li);
+        });
+    }catch(error){
+        console.log(error);
+    }
+};
 
-
+agregarComidas();

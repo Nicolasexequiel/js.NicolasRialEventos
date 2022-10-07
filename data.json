@@ -1,0 +1,6 @@
+[
+{"id": 1 , "nombre":"Arroz de coliflor con pollo" , "precio":1000 , "foto": "./imagenes/comida2.png"},
+{"id": 2 , "nombre":"Fideos de zucchini con salsa bolognesa" ,"precio":1010 ,"foto":"./imagenes/comida3.png"},
+{"id": 3 , "nombre":"Carne al horno con puré de coliflor" , "precio":1020 , "foto": "./imagenes/comidas5.png"},
+{"id": 4 , "nombre":"Omelette de jamón y queso con acelga salteada" , "precio":1030 , "foto": "./imagenes/comida1.png"}
+]
